@@ -95,15 +95,21 @@ int main() {
     add_vertex_data(g, 2, 'C');
     add_vertex_data(g, 3, 'D');
     add_vertex_data(g, 4, 'E');
-    add_vertex_data(g, 5, 'G');
+    add_vertex_data(g, 5, 'F');
 
-    add_edge(g, 0, 1, 1); 
-    add_edge(g, 1, 2, 2); 
-    add_edge(g, 0, 5, 10); 
-    add_edge(g, 2, 3, 20); 
-    add_edge(g, 2, 5, 3); 
-    add_edge(g, 4, 3, 5); 
-    add_edge(g, 5, 4, 4); 
+    add_edge(g, 5, 3, 1);
+	add_edge(g, 5, 4, 3);
+	add_edge(g, 5, 2, 4);
+	add_edge(g, 4, 2, 2);
+	add_edge(g, 4, 3, 6);
+    add_edge(g, 3, 0, 10);	
+    add_edge(g, 3, 1, 9);
+    add_edge(g, 3, 2, 3);
+    add_edge(g, 2, 1, 4);
+    add_edge(g, 1, 0, 2);
+    add_edge(g, 2, 0, 7);
+	dijkstra(g, 'F');
+	
     
     
     dijkstra(g, 'A');
