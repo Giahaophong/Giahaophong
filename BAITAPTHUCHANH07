@@ -1,67 +1,93 @@
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-// Cấu trúc để lưu các cạnh đồ thị
-// u, v là 2 đỉnh, c là trọng số cạnh
-struct Edge {
-    int u, v, c;
-    Edge(int _u, int _v, int _c): u(_u), v(_v), c(_c) {};
+#define edge pair<int, int>
+
+class Graph {
+   private:
+  vector<pair<int, edge> > G;  // graph
+  vector<pair<int, edge> > T;  // mst
+  int *parent;
+  int V;  // number of vertices/nodes in graph
+   public:
+  Graph(int V);
+  void AddWeightedEdge(int u, int v, int w);
+  int find_set(int i);
+  void union_set(int u, int v);
+  void kruskal();
+  void print();
 };
+Graph::Graph(int V) {
+  parent = new int[V];
 
-struct Dsu {
-    vector<int> par;
+  //i 0 1 2 3 4 5
+  //parent[i] 0 1 2 3 4 5
+  for (int i = 0; i < V; i++)
+    parent[i] = i;
 
-    void init(int n) {
-        par.resize(n + 5, 0);
-        for (int i = 1; i <= n; i++) par[i] = i;
-    }
-
-    int find(int u) {
-        if (par[u] == u) return u;
-        return par[u] = find(par[u]);
-    }
-
-    bool join(int u, int v) {
-        u = find(u); v = find(v);
-        if (u == v) return false;
-        par[v] = u;
-        return true;
-    }
-} dsu;
-
-// n và m là số đỉnh và số cạnh
-// totalWeight là tổng trọng số các cạnh trong cây khung nhỏ nhất
-int n, m, totalWeight = 0;
-vector < Edge > edges;
-
-int main() {
-    // Fast IO
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-    cin >> n >> m;
-
-    for (int i = 1; i <= m; i++) {
-        int u, v, c;
-        cin >> u >> v >> c;
-        edges.push_back({u, v, c});
-    }
-
-    dsu.init(n);
-
-    // Sắp xếp lại các cạnh theo trọng số tăng dần
-    sort(edges.begin(), edges.end(), [](Edge & x, Edge & y) {
-        return x.c < y.c;
-    });
-
-    // Duyệt qua các cạnh theo thứ tự đã sắp xếp
-    for (auto e : edges) {
-        // Nếu không hợp nhất được 2 đỉnh u và v thì bỏ qua
-        if (!dsu.join(e.u, e.v)) continue;
-
-        // Nếu hợp nhất được u, v ta thêm trọng số cạnh vào kết quả
-        totalWeight += e.c;
-    }
-
-    // Xuất ra kết quả
-    cout << totalWeight << '\n';
+  G.clear();
+  T.clear();
 }
+void Graph::AddWeightedEdge(int u, int v, int w) {
+  G.push_back(make_pair(w, edge(u, v)));
+}
+int Graph::find_set(int i) {
+  // If i is the parent of itself
+  if (i == parent[i])
+    return i;
+  else
+    // Else if i is not the parent of itself
+    // Then i is not the representative of his set,
+    // so we recursively call Find on its parent
+    return find_set(parent[i]);
+}
+
+void Graph::union_set(int u, int v) {
+  parent[u] = parent[v];
+}
+void Graph::kruskal() {
+  int i, uRep, vRep;
+  sort(G.begin(), G.end());  // increasing weight
+  for (i = 0; i < G.size(); i++) {
+    uRep = find_set(G[i].second.first);
+    vRep = find_set(G[i].second.second);
+    if (uRep != vRep) {
+      T.push_back(G[i]);  // add to tree
+      union_set(uRep, vRep);
+    }
+  }
+}
+void Graph::print() {
+  cout << "Edge :"
+     << " Weight" << endl;
+  for (int i = 0; i < T.size(); i++) {
+    cout << T[i].second.first << " - " << T[i].second.second << " : "
+       << T[i].first;
+    cout << endl;
+  }
+}
+int main() {
+  Graph g(6);
+  g.AddWeightedEdge(0, 1, 4);
+  g.AddWeightedEdge(0, 2, 4);
+  g.AddWeightedEdge(1, 2, 2);
+  g.AddWeightedEdge(1, 0, 4);
+  g.AddWeightedEdge(2, 0, 4);
+  g.AddWeightedEdge(2, 1, 2);
+  g.AddWeightedEdge(2, 3, 3);
+  g.AddWeightedEdge(2, 5, 2);
+  g.AddWeightedEdge(2, 4, 4);
+  g.AddWeightedEdge(3, 2, 3);
+  g.AddWeightedEdge(3, 4, 3);
+  g.AddWeightedEdge(4, 2, 4);
+  g.AddWeightedEdge(4, 3, 3);
+  g.AddWeightedEdge(5, 2, 2);
+  g.AddWeightedEdge(5, 4, 3);
+  g.kruskal();
+  g.print();
+  return 0;
+}
+
+  
