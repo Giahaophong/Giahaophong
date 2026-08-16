@@ -1,0 +1,214 @@
+//Form trang chủ
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Quayso
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            
+        }
+private void Form1_Load(object sender, EventArgs e)
+{           
+    timer1.Start();
+}
+private void timer1_Tick(object sender, EventArgs e)
+{
+    DateTime now = DateTime.Now;
+    string thu = "";
+
+    switch (now.DayOfWeek)
+    {
+        case DayOfWeek.Monday:
+            thu = "Thứ Hai";
+            break;
+        case DayOfWeek.Tuesday:
+            thu = "Thứ Ba";
+            break;
+        case DayOfWeek.Wednesday:
+            thu = "Thứ Tư";
+            break;
+        case DayOfWeek.Thursday:
+            thu = "Thứ Năm";
+            break;
+        case DayOfWeek.Friday:
+            thu = "Thứ Sáu";
+            break;
+        case DayOfWeek.Saturday:
+            thu = "Thứ Bảy";
+            break;
+        case DayOfWeek.Sunday:
+            thu = "Chủ Nhật";
+            break;
+    }
+
+    label2.Text = $"{thu}, {now:dd/MM/yyyy - hh:mm:ss tt}";
+}
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+     "Bạn có muốn vào trò chơi?",
+     "Xác nhận vào chơi",
+     MessageBoxButtons.YesNo,
+     MessageBoxIcon.Question
+ );
+
+            // Nếu chọn No thì hủy đóng form
+            if (result == DialogResult.No)
+            {
+
+            }
+            else
+            {
+                this.Hide();
+                MainForm a = new MainForm();
+                a.ShowDialog();
+                this.Close();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+     "Bạn có chắc chắn muốn thoát trò chơi?",
+     "Xác nhận thoát",
+     MessageBoxButtons.YesNo,
+     MessageBoxIcon.Question
+ );
+	
+
+            // Nếu chọn No thì hủy đóng form
+            if (result == DialogResult.No)
+            {
+
+            }
+            else
+            {
+                Application.Exit();
+            }
+         
+        }
+    }
+}
+// Form chính
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Quayso
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+        int so1, so2, so3;
+        Random rand = new Random();
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            label1.Text = label2.Text = label3.Text;
+		//Khi mới vô form và chưa bấm nút quay số thì không được bấm nút chơi lại và hiển thị kết quả
+            button1.Enabled = false;
+            button3.Enabled = false;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+
+            so1 = int.Parse(label1.Text);
+            so2 = int.Parse(label2.Text);
+            so3 = int.Parse(label3.Text);
+
+            
+
+            button1.Enabled = true;
+            button3.Enabled = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+
+            label1.Text = "0";
+            label2.Text = "0";
+            label3.Text = "0";
+
+            so1 = 0;
+            so2 = 0;
+            so3 = 0;
+            
+
+            button3.Enabled = false;   // Tắt nút kết quả
+            button2.Enabled = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+            so1 = rand.Next(0, 10);
+            so2 = rand.Next(0, 10);
+            so3 = rand.Next(0, 10);
+
+            label1.Text = so1.ToString();
+            label2.Text = so2.ToString();
+            label3.Text = so3.ToString();
+            button1.Enabled = true;
+            button3.Enabled = true;
+
+        }    
+      
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+            MessageBox.Show("Kết quả là: " + so1 + " " + so2 + " " + so3, "Tìm kết quả");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+    "Bạn có xác nhận về trang chủ trò chơi?",
+    "Xác nhận thoát",
+    MessageBoxButtons.YesNo,
+    MessageBoxIcon.Question
+);
+
+            // Nếu chọn No thì hủy đóng form
+            if (result == DialogResult.No)
+            {
+
+            }
+            else
+            {
+                this.Hide();
+                Form1 f = new Form1();
+                f.ShowDialog();
+                this.Close();
+            }
+
+        }
+    }
+}
+// Link bài tập
+https://www.facebook.com/photo?fbid=1152497406524428&set=pcb.9568447409855299 
+ 
