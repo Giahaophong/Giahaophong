@@ -1,0 +1,298 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+// form1
+namespace Tictactoe
+{
+    public partial class Form1 : Form
+    {
+	private Form parentForm;
+        bool turn = true;
+        int turn_count = 0;
+        public Form1()
+        {
+            InitializeComponent();
+	    parentForm = form;
+        }
+//private void QuayLaiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            parentForm.Show();
+            this.Hide(); // KHÔNG Close → giữ bàn cờ
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Game is designed by Gia Hào", "Tic tac toe About");
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show(
+        "Bạn có chắc chắn muốn thoát trò chơi?",
+        "Xác nhận thoát",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question
+    );
+
+            // Nếu chọn No thì hủy đóng form
+            if (dialogResult == DialogResult.No)
+            {
+                
+            }
+            else
+            { 
+                Application.Exit();
+            }
+        }
+        private void button(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            if (turn)
+                b.Text = "X";
+            else
+                b.Text = "O";
+
+            turn = !turn;
+            b.Enabled = false;
+		turn_count++;
+            CheckforWinner();
+        }
+     private void CheckforWinner()
+        {
+            bool there_is_a_winner = false;
+                if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (A3.Text == A4.Text) && (A4.Text == A5.Text) && (A5.Text == A6.Text) && (A6.Text == A7.Text) && (A7.Text == A8.Text) && (A8.Text == A9.Text) && (A9.Text == A10.Text) && (!A1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((B1.Text == B2.Text) && (B2.Text == B3.Text) && (B3.Text == B4.Text) && (B4.Text == B5.Text) && (B5.Text == B6.Text) && (B6.Text == B7.Text) && (B7.Text == B8.Text) && (B8.Text == B9.Text) && (B9.Text == B10.Text) && (!B1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((C1.Text == C2.Text) && (C2.Text == C3.Text) && (C3.Text == C4.Text) && (C4.Text == C5.Text) && (C5.Text == C6.Text) && (C6.Text == C7.Text) && (C7.Text == C8.Text) && (C8.Text == C9.Text) && (C9.Text == C10.Text) && (!C1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((D1.Text == D2.Text) && (D2.Text == D3.Text) && (D3.Text == D4.Text) && (D4.Text == D5.Text) && (D5.Text == D6.Text) && (D6.Text == D7.Text) && (D7.Text == D8.Text) && (D8.Text == D9.Text)  && (D9.Text == D10.Text) && (!D1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((E1.Text == E2.Text) && (E2.Text == E3.Text) && (E3.Text == E4.Text) && (E4.Text == E5.Text) && (E5.Text == E6.Text) && (E6.Text == E7.Text) &&  (E7.Text == E8.Text) && (E8.Text == E9.Text) && (E9.Text == E10.Text) && (!E1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((F1.Text == F2.Text) && (F2.Text == F3.Text) && (F3.Text == F4.Text) && (F4.Text == F5.Text) && (F5.Text == F6.Text) && (F6.Text == F7.Text) &&  (F7.Text == F8.Text) && (F8.Text == F9.Text) && (F9.Text == F10.Text) && (!F1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((G1.Text == G2.Text) && (G2.Text == G3.Text) && (G3.Text == G4.Text) && (G4.Text == G5.Text) && (G5.Text == G6.Text) && (G6.Text == G7.Text) &&  (G7.Text == G8.Text) && (G8.Text == G9.Text) && (G9.Text == G10.Text) && (!G1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((H1.Text == H2.Text) && (H2.Text == H3.Text) && (H3.Text == H4.Text) && (H4.Text == H5.Text) && (H5.Text == H6.Text) && (H6.Text == H7.Text) &&  (H7.Text == H8.Text) && (H8.Text == H9.Text) && (H9.Text == H10.Text) && (!H1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((I1.Text == I2.Text) && (I2.Text == I3.Text) && (I3.Text == I4.Text) && (I4.Text == I5.Text) && (I5.Text == I6.Text) && (I6.Text == I7.Text) &&  (I7.Text == I8.Text) && (I8.Text == I9.Text) && (I9.Text == I10.Text) && (!I1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((J1.Text == J2.Text) && (J2.Text == J3.Text) && (J3.Text == J4.Text) && (J4.Text == J5.Text) && (J5.Text == J6.Text) && (J6.Text == J7.Text) &&  (J7.Text == J8.Text) && (J8.Text == J9.Text) && (J9.Text == J10.Text) && (!J1.Enabled))
+{
+    there_is_a_winner = true;
+}
+//VERTICAL
+else if ((A1.Text == B1.Text) && (B1.Text == C1.Text) && (C1.Text == D1.Text) && (D1.Text == E1.Text) && (E1.Text == F1.Text) && (F1.Text == G1.Text) &&(G1.Text == H1.Text) && (H1.Text == I1.Text) && (I1.Text == J1.Text) && (!A1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (C2.Text == D2.Text) && (D2.Text == E2.Text) && (E2.Text == F2.Text) && (F2.Text == G2.Text) &&(G2.Text == H2.Text) && (H2.Text == I2.Text) && (I2.Text == J2.Text) && (!A2.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (C3.Text == D3.Text) && (D3.Text == E3.Text) && (E3.Text == F3.Text) && (F3.Text == G3.Text) &&(G3.Text == H3.Text) && (H3.Text == I3.Text) && (I3.Text == J3.Text) && (!A3.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A4.Text == B4.Text) && (B4.Text == C4.Text) && (C4.Text == D4.Text) && (D4.Text == E4.Text) && (E4.Text == F4.Text) && (F4.Text == G4.Text) &&(G4.Text == H4.Text) && (H4.Text == I4.Text) && (I4.Text == J4.Text) && (!A4.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A5.Text == B5.Text) && (B5.Text == C5.Text) && (C5.Text == D5.Text) && (D5.Text == E5.Text) && (E5.Text == F5.Text) && (F5.Text == G5.Text) &&(G5.Text == H5.Text) && (H5.Text == I5.Text) && (I5.Text == J5.Text) && (!A5.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A6.Text == B6.Text) && (B6.Text == C6.Text) && (C6.Text == D6.Text) && (D6.Text == E6.Text) && (E6.Text == F6.Text) && (F6.Text == G6.Text) &&(G6.Text == H6.Text) && (H6.Text == I6.Text) && (I6.Text == J6.Text) && (!A6.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A7.Text == B7.Text) && (B7.Text == C7.Text) && (C7.Text == D7.Text) && (D7.Text == E7.Text) && (E7.Text == F7.Text) && (F7.Text == G7.Text) &&(G7.Text == H7.Text) && (H7.Text == I7.Text) && (I7.Text == J7.Text) && (!A7.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A8.Text == B8.Text) && (B8.Text == C8.Text) && (C8.Text == D8.Text) && (D8.Text == E8.Text) && (E8.Text == F8.Text) && (F8.Text == G8.Text) &&(G8.Text == H8.Text) && (H8.Text == I8.Text) && (I8.Text == J8.Text) && (!A8.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A9.Text == B9.Text) && (B9.Text == C9.Text) && (C9.Text == D9.Text) && (D9.Text == E9.Text) && (E9.Text == F9.Text) && (F9.Text == G9.Text) &&(G9.Text == H9.Text) && (H9.Text == I9.Text) && (I9.Text == J9.Text) && (!A9.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A10.Text == B10.Text) && (B10.Text == C10.Text) && (C10.Text == D10.Text) && (D10.Text == E10.Text) && (E10.Text == F10.Text) && (F10.Text == G10.Text) && (G10.Text == H10.Text) && (H10.Text == I10.Text) && (I10.Text == J10.Text) && (!A10.Enabled))
+{
+    there_is_a_winner = true;
+}
+//DIAGONAL
+else if ((A1.Text == B2.Text) && (B2.Text == C3.Text) && (C3.Text == D4.Text) && (D4.Text == E5.Text) && (E5.Text == F6.Text) && (F6.Text == G7.Text) && (G7.Text == H8.Text) && (H8.Text == I9.Text) && (I9.Text == J10.Text) && (!A1.Enabled))
+{
+    there_is_a_winner = true;
+}
+else if ((A10.Text == B9.Text) && (B9.Text == C8.Text) && (C8.Text == D7.Text) && (D7.Text == E6.Text) && (E6.Text == F5.Text) && (F5.Text == G4.Text) && (G4.Text == H3.Text) && (H3.Text == I2.Text) && (I2.Text == J1.Text) &&  (!A5.Enabled))
+{
+    there_is_a_winner = true;
+}
+                if (there_is_a_winner)
+                {
+                    DisableButton();
+                    String winner = "";
+                    if (turn)
+                    {
+                    winner = "O";
+                    }
+                    else { 
+                    winner = "X"; 
+                    }
+                    MessageBox.Show(winner + " Wins!", "Yeah");
+                }
+                else { 
+                  if (turn_count == 100)
+                {
+                    MessageBox.Show("Draw!", "Bummer");
+                }
+            }
+        }
+         private void DisableButton()
+        {
+            try { 
+            foreach (Control c in Controls)
+             {
+                Button b = (Button)c;
+                b.Enabled = false;
+             }
+           }
+            catch
+            {
+               
+            }
+
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            turn = true;
+            turn_count = 0;
+            try
+            {
+                foreach (Control c in Controls)
+                {
+                    Button b = (Button)c;
+                    b.Enabled = true;
+                    b.Text = "";
+                }
+            }
+            catch
+            {
+
+            }
+ private void button_enter(object sender, EventArgs e)
+ {
+     Button b = (Button)sender;
+     if (b.Enabled) { 
+      if (turn)
+         b.Text = "X";
+      else
+         b.Text = "O";
+     }
+ }
+
+ private void button_leave(object sender, EventArgs e)
+ {
+     Button b = (Button)sender;
+     if (b.Enabled)
+     {
+         b.Text = "";
+     }
+  }
+private void Form1_Load(object sender, EventArgs e)
+{
+    Form2 a = new Form2();
+    a.ShowDialog();
+	this.Hide();
+}
+private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            parentForm.Show();
+            this.Hide();     // ẩn thay vì đóng
+            e.Cancel = true; // ngăn không cho form bị destroy
+        }
+ }
+}
+
+//form1
+private Form1 gameForm;
+ public Form1()
+ {
+     InitializeComponent();
+ }
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            DialogResult dialogResult = MessageBox.Show(
+       "Bạn có sẵn sàng muốn bắt đầu trò chơi?",
+       "Xác nhận bắt đầu",
+       MessageBoxButtons.YesNo,
+       MessageBoxIcon.Question
+   );
+            if (dialogResult == DialogResult.No)
+            {
+                Application.Exit();
+            }
+            else
+            {
+
+            }
+                         DialogResult result = MessageBox.Show(
+    "Chào mừng bạn đến với trò chơi Ca-rô của chúng tôi!",
+    "Thông báo",
+    MessageBoxButtons.OKCancel
+);
+
+            if (result == DialogResult.OK)
+            {
+              if (gameForm == null || gameForm.IsDisposed)
+                {
+                    gameForm = new Form1(this);
+                }
+                
+            }
+           this.Hide(); // chỉ ẩn khi bấm OK
+           gameForm.Show();
+// Tương đương:        
+MessageBox.Show("Chào mừng bạn đến với trò chơi Ca-rô của chúng tôi!");
+
+this.Hide();
+        }
+
+       
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+    }
+}
